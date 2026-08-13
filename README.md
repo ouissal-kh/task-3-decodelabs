@@ -210,6 +210,7 @@ task-3-decodelabs/
     ├── 04-show-databases.jpg
     ├── 05-select-interns-records.jpg
     └── 06-python-rds-connection.jpg
+    
 Deployment & Testing Screenshots
 1. AWS RDS — Database Available
 
