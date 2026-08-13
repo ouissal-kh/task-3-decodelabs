@@ -93,9 +93,11 @@ The RDS instance uses an AWS Security Group to control network access.
 The database was configured to allow inbound MySQL connections only from the authorized client IP address using a /32 CIDR rule.
 
 Inbound:
+
 Authorized Client IP /32
 
 Outbound:
+
 0.0.0.0/0
 
 The database connection was also successfully tested using SSL/TLS through MySQL Workbench.
@@ -290,7 +292,7 @@ Cloud Infrastructure Management
 Data Persistence Testing
 Project Status
 
-Status: Completed
+Status: Completed ✅
 
 This project successfully demonstrates the deployment, configuration, connectivity, and testing of a managed MySQL cloud database using Amazon RDS.
 
@@ -300,7 +302,8 @@ Author
 
 Ouissal Khengui
 
-GitHub:
+GitHub
+
 https://github.com/ouissal-kh
 
 License
