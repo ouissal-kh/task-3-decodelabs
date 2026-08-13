@@ -1,10 +1,17 @@
 # AWS RDS MySQL – Cloud Database Deployment
 
+![AWS](https://img.shields.io/badge/AWS-Amazon%20RDS-orange?logo=amazon-aws)
+![MySQL](https://img.shields.io/badge/Database-MySQL-blue?logo=mysql)
+![Python](https://img.shields.io/badge/Python-Integration-yellow?logo=python)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
 ## 📋 Project Overview
 
-This project demonstrates the deployment and configuration of a managed relational database on **Amazon Web Services (AWS)** using **Amazon RDS with MySQL**.
+This project demonstrates the deployment, configuration, and testing of a managed relational database on **Amazon Web Services (AWS)** using **Amazon RDS with MySQL**.
 
-The objective is to deploy a reliable, scalable, and secure cloud-hosted database, store intern records, and verify data persistence through SQL, MySQL Workbench, and Python.
+The objective was to deploy a reliable and secure cloud-hosted database, store intern records, and verify data persistence through SQL, MySQL Workbench, and Python.
+
+### Objectives
 
 During the implementation, the project:
 
@@ -25,55 +32,55 @@ The result is a functional **cloud-hosted MySQL database** accessible through bo
 ## 🏗️ Architecture
 
 ```text
-┌──────────────────────┐
-│    Local Computer    │
-│                       │
-│  MySQL Workbench      │
-│        +              │
-│      Python           │
-└──────────┬────────────┘
-           │
-           │ MySQL / TLS
-           │ Port 3306
-           ▼
-┌──────────────────────┐
-│     Amazon Web        │
-│       Services        │
-│        (AWS)          │
-└──────────┬────────────┘
-           │
-           ▼
-┌──────────────────────┐
-│      Amazon RDS       │
-│                       │
-│   MySQL Community     │
-└──────────┬────────────┘
-           │
-           ▼
-┌──────────────────────┐
-│      interns_db       │
-│                       │
-│    Interns Table      │
-├──────────────────────┤
-│ Name                  │
-│ Role                  │
-│ Email                 │
-└──────────────────────┘
+┌──────────────────────────────┐
+│        Local Computer        │
+│                              │
+│     MySQL Workbench         │
+│             +                │
+│           Python             │
+└──────────────┬───────────────┘
+               │
+               │ MySQL / TLS
+               │ Port 3306
+               ▼
+┌──────────────────────────────┐
+│     Amazon Web Services      │
+│            (AWS)             │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│          Amazon RDS          │
+│                              │
+│      MySQL Community         │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         interns_db           │
+│                              │
+│       Interns Table          │
+├──────────────────────────────┤
+│ Name                         │
+│ Role                         │
+│ Email                        │
+└──────────────────────────────┘
 ```
 
 ---
 
 ## 🛠️ Technologies
 
-- Amazon Web Services (AWS)
-- Amazon RDS
-- MySQL Community
-- MySQL Workbench
-- Python
-- mysql-connector-python
-- Git
-- GitHub
-- PowerShell
+- **Amazon Web Services (AWS)**
+- **Amazon RDS**
+- **MySQL Community**
+- **MySQL Workbench**
+- **Python**
+- **mysql-connector-python**
+- **SQL**
+- **Git**
+- **GitHub**
+- **PowerShell**
 
 ---
 
@@ -86,12 +93,12 @@ The RDS instance was configured with the following parameters:
 | Cloud Provider | AWS |
 | Database Service | Amazon RDS |
 | Database Engine | MySQL Community |
-| Instance Class | db.t4g.micro |
-| Region | eu-north-1 |
-| Availability Zone | eu-north-1b |
-| Port | 3306 |
-| Database | interns_db |
-| Table | Interns |
+| Instance Class | `db.t4g.micro` |
+| Region | `eu-north-1` |
+| Availability Zone | `eu-north-1b` |
+| Port | `3306` |
+| Database | `interns_db` |
+| Table | `Interns` |
 
 The RDS instance successfully reached the **Available** status.
 
@@ -103,34 +110,35 @@ The RDS instance uses an **AWS Security Group** to control network access.
 
 The database was configured to allow inbound MySQL connections only from the authorized client IP address using a `/32` CIDR rule.
 
-**Inbound:**
-```
-Authorized Client IP /32
-```
+### Network Rules
 
-**Outbound:**
-```
+```text
+Inbound:
+Authorized Client IP /32
+
+Outbound:
 0.0.0.0/0
 ```
 
 The database connection was also successfully tested using **SSL/TLS** through MySQL Workbench.
 
-> This configuration demonstrates basic cloud network security by restricting database access to an authorized source.
-> The public client IP address is intentionally not exposed in this README.
+> **Security Note:** The actual public client IP address and database credentials are intentionally not exposed in this repository.
+
+This configuration demonstrates basic cloud network security by restricting database access to an authorized source.
 
 ---
 
 ## 🗄️ Database Structure
 
-The project uses the following database:
+### Database
 
-```
+```text
 interns_db
 ```
 
-The main table is:
+### Main Table
 
-```
+```text
 Interns
 ```
 
@@ -138,9 +146,9 @@ Interns
 
 | Column | Description |
 |---|---|
-| Name | Intern name |
-| Role | Intern role |
-| Email | Intern email |
+| `Name` | Intern name |
+| `Role` | Intern role |
+| `Email` | Intern email |
 
 ---
 
@@ -181,39 +189,44 @@ VALUES
 
 The database and table were tested using SQL queries.
 
-**Verify Databases**
+### Verify Databases
+
 ```sql
 SHOW DATABASES;
 ```
+
 The `interns_db` database was successfully displayed.
 
-**Select Database**
+### Select Database
+
 ```sql
 USE interns_db;
 ```
 
-**Retrieve Intern Records**
+### Retrieve Intern Records
+
 ```sql
 SELECT * FROM Interns;
 ```
+
 The query successfully returned the inserted test records.
 
-> This confirms that data can be stored and retrieved from the cloud-hosted database.
+This confirms that data can be stored and retrieved from the cloud-hosted database.
 
 ---
 
 ## 🖥️ MySQL Workbench
 
-The AWS RDS MySQL database was successfully connected using MySQL Workbench.
+The AWS RDS MySQL database was successfully connected using **MySQL Workbench**.
 
 The connection was configured using:
 
-- RDS endpoint
-- MySQL port: `3306`
-- User: `admin`
-- SSL/TLS: Enabled
+- **RDS endpoint**
+- **MySQL port:** `3306`
+- **User:** `admin`
+- **SSL/TLS:** Enabled
 
-> The successful connection confirms that the cloud database is accessible from a local SQL client.
+The successful connection confirms that the cloud database is accessible from a local SQL client.
 
 ---
 
@@ -221,9 +234,9 @@ The connection was configured using:
 
 A Python script named `test_rds.py` was created to connect programmatically to the AWS RDS MySQL database.
 
-The script uses:
+The project uses:
 
-```
+```text
 mysql-connector-python
 ```
 
@@ -237,13 +250,13 @@ The Python script:
 6. Displays the retrieved records
 7. Closes the database connection
 
-> The Python connection was successfully tested.
+The Python connection was successfully tested.
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 task-3-decodelabs/
 │
 ├── test_rds.py
@@ -266,7 +279,7 @@ task-3-decodelabs/
 
 ### 1. AWS RDS — Database Available
 
-The Amazon RDS MySQL instance was successfully created and reached the Available status.
+The Amazon RDS MySQL instance was successfully created and reached the **Available** status.
 
 ![AWS RDS Database Available](images/01-aws-rds-database-available.jpg)
 
@@ -282,15 +295,15 @@ The AWS Security Group was configured to allow the required database connectivit
 
 ### 3. MySQL Workbench — Successful Connection
 
-The AWS RDS MySQL database was successfully accessed using MySQL Workbench.
+The AWS RDS MySQL database was successfully accessed using MySQL Workbench with SSL/TLS enabled.
 
 ![MySQL Workbench Connection](images/03-mysql-workbench-connection.jpg)
 
 ---
 
-### 4. SHOW DATABASES — interns_db
+### 4. SHOW DATABASES — `interns_db`
 
-The database was verified using the SHOW DATABASES SQL command.
+The database was successfully verified using the `SHOW DATABASES` SQL command.
 
 ![SHOW DATABASES](images/04-show-databases.jpg)
 
@@ -298,7 +311,7 @@ The database was verified using the SHOW DATABASES SQL command.
 
 ### 5. SELECT * FROM Interns — Records
 
-The Interns table was queried successfully and the inserted test records were displayed.
+The `Interns` table was queried successfully and the inserted test records were displayed.
 
 ![Interns Records](images/05-select-interns-records.jpg)
 
@@ -306,7 +319,7 @@ The Interns table was queried successfully and the inserted test records were di
 
 ### 6. Python — Connected Successfully to AWS RDS
 
-The Python script successfully connected to the AWS RDS MySQL database and retrieved records from the Interns table.
+The Python script successfully connected to AWS RDS and retrieved records from the `Interns` table.
 
 ![Python RDS Connection](images/06-python-rds-connection.jpg)
 
@@ -322,7 +335,7 @@ pip install -r requirements.txt
 
 The project requires:
 
-```
+```text
 mysql-connector-python
 ```
 
@@ -330,17 +343,17 @@ mysql-connector-python
 
 ## ▶️ Running the Python Test
 
-Run the Python database connection script:
+Run the database connection script:
 
 ```bash
 python test_rds.py
 ```
 
-A successful execution confirms the connection to AWS RDS and displays the records stored in the Interns table.
+A successful execution confirms the connection to AWS RDS and displays the records stored in the `Interns` table.
 
-**Example successful output:**
+### Example Output
 
-```
+```text
 Connected successfully to AWS RDS!
 
 Interns table:
@@ -358,14 +371,29 @@ Connection closed.
 
 Data persistence was verified through the following process:
 
-1. Created the `interns_db` database.
-2. Created the `Interns` table.
-3. Inserted test records.
-4. Retrieved the records using MySQL Workbench.
-5. Retrieved the same records using Python.
-6. Confirmed successful connection and data retrieval from AWS RDS.
+1. Created the `interns_db` database
+2. Created the `Interns` table
+3. Inserted test records
+4. Retrieved the records using MySQL Workbench
+5. Retrieved the same records using Python
+6. Confirmed successful connection and data retrieval from AWS RDS
 
-> This confirms that the data was successfully stored and retrieved from the managed cloud database.
+This confirms that the data was successfully **stored and retrieved from the managed cloud database**.
+
+---
+
+## 🎯 Key Results
+
+The project successfully demonstrated:
+
+- ☁️ Deployment of a managed MySQL database on AWS
+- 🔐 Network access control using an AWS Security Group
+- 🔒 SSL/TLS-secured database connectivity
+- 🗄️ Database and table creation using SQL
+- 🧪 Data insertion and persistence verification
+- 🖥️ Database access through MySQL Workbench
+- 🐍 Programmatic database access using Python
+- 🔄 Successful retrieval of the same cloud-hosted data through multiple clients
 
 ---
 
@@ -389,11 +417,11 @@ Data persistence was verified through the following process:
 
 ## 🚦 Project Status
 
-**Status: Completed ✅**
+**Completed ✅**
 
-This project successfully demonstrates the deployment, configuration, connectivity, and testing of a managed MySQL cloud database using Amazon RDS.
+This project successfully demonstrates the deployment, configuration, connectivity, and testing of a managed MySQL cloud database using **Amazon RDS**.
 
-The database was successfully accessed through both MySQL Workbench and Python, and data persistence was verified.
+The database was successfully accessed through both **MySQL Workbench** and **Python**, and data persistence was verified.
 
 ---
 
@@ -401,7 +429,7 @@ The database was successfully accessed through both MySQL Workbench and Python, 
 
 **Ouissal Khengui**
 
-GitHub: [https://github.com/ouissal-kh](https://github.com/ouissal-kh)
+- GitHub: [ouissal-kh](https://github.com/ouissal-kh)
 
 ---
 
